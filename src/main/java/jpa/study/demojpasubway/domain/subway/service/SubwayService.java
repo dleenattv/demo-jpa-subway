@@ -5,6 +5,7 @@ import jpa.study.demojpasubway.domain.subway.repository.SubwayRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubwayService {
@@ -23,5 +24,9 @@ public class SubwayService {
 
     public List<Subway> findAllSubway() {
         return subwayRepository.findAll();
+    }
+
+    public Optional<Subway> findSubwayById(Long id) {
+        return subwayRepository.findById(id);
     }
 }
