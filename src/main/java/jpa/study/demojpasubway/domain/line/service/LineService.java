@@ -5,6 +5,8 @@ import jpa.study.demojpasubway.domain.line.entity.Line;
 import jpa.study.demojpasubway.domain.line.repository.LineRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class LineService {
     private LineRepository lineRepository;
@@ -18,5 +20,9 @@ public class LineService {
                 lineCreateDto.getLineName());
         lineRepository.save(line);
         return line;
+    }
+
+    public Optional<Line> findLineById(Long id) {
+        return lineRepository.findById(id);
     }
 }
