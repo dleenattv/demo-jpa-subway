@@ -21,4 +21,25 @@ public class Line {
 
     public Line() {
     }
+
+    public Line(Integer lineNumber, String lineName) {
+        this.lineNumber = lineNumber;
+        this.lineName = lineName;
+    }
+
+    public Integer getLineNumber() {
+        return lineNumber;
+    }
+
+    public void setLineNumber(Integer lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    public String getLineName() {
+        return lineName;
+    }
+
+    public void setLineName(String lineName) {
+        this.lineName = lineName;
+    }
 }
