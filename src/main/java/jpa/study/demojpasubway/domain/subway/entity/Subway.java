@@ -1,8 +1,8 @@
 package jpa.study.demojpasubway.domain.subway.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import jpa.study.demojpasubway.domain.line.entity.Line;
+
+import javax.persistence.*;
 
 @Entity
 public class Subway {
@@ -11,7 +11,9 @@ public class Subway {
     @GeneratedValue
     private Long stationId;
     private String stationName;
-    private Long lineId;
+    @ManyToOne
+    @JoinColumn(name="LINE_ID")
+    private Line line;
 
     public Subway() {
     }
@@ -20,8 +22,8 @@ public class Subway {
         this.stationName = stationName;
     }
 
-    public Subway(String stationName, Long lineId) {
+    public Subway(String stationName, Line line) {
         this.stationName = stationName;
-        this.lineId = lineId;
+        this.line = line;
     }
 }
