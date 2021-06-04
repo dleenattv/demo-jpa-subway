@@ -5,6 +5,7 @@ import jpa.study.demojpasubway.domain.line.entity.Line;
 import jpa.study.demojpasubway.domain.line.repository.LineRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,12 @@ public class LineService {
 
     public Optional<Line> findLineById(Long id) {
         return lineRepository.findById(id);
+    }
+
+    public void deleteLine(Long id) {
+        Line line = lineRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        if (line != null) {
+            lineRepository.delete(line);
+        }
     }
 }
