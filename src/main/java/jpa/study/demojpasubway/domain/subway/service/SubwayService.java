@@ -4,6 +4,8 @@ import jpa.study.demojpasubway.domain.subway.entity.Subway;
 import jpa.study.demojpasubway.domain.subway.repository.SubwayRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SubwayService {
 
@@ -17,5 +19,9 @@ public class SubwayService {
         Subway subway = new Subway(stationName);
         subwayRepository.save(subway);
         return subway;
+    }
+
+    public List<Subway> findAllSubway() {
+        return subwayRepository.findAll();
     }
 }
