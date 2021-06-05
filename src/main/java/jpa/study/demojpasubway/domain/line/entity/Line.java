@@ -13,8 +13,13 @@ public class Line {
     @GeneratedValue
     @Column(name = "LINE_ID")
     private Long lineId;
+
+    @Column
     private Integer lineNumber;
+
+    @Column
     private String lineName;
+
     @OneToMany(mappedBy = "line")
     private List<Subway> stations = new ArrayList<>();
 
@@ -24,22 +29,6 @@ public class Line {
 
     public Line(Integer lineNumber, String lineName) {
         this.lineNumber = lineNumber;
-        this.lineName = lineName;
-    }
-
-    public Integer getLineNumber() {
-        return lineNumber;
-    }
-
-    public void setLineNumber(Integer lineNumber) {
-        this.lineNumber = lineNumber;
-    }
-
-    public String getLineName() {
-        return lineName;
-    }
-
-    public void setLineName(String lineName) {
         this.lineName = lineName;
     }
 }
