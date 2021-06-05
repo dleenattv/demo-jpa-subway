@@ -11,14 +11,15 @@ import java.util.Optional;
 
 @RestController
 public class SubwayController {
-    private SubwayService subwayService;
+
+    private final SubwayService subwayService;
 
     public SubwayController(SubwayService subwayService) {
         this.subwayService = subwayService;
     }
 
     @PostMapping("/stations")
-    public Subway createSubway(SubwayCreateDto subwayCreateDto) {
+    public Subway createSubway(SubwayCreateDto subwayCreateDto) throws Exception {
         return subwayService.createSubway(subwayCreateDto);
     }
 
