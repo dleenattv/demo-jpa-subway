@@ -10,16 +10,17 @@ import java.util.Optional;
 
 @Service
 public class LineService {
-    private LineRepository lineRepository;
+
+    private final LineRepository lineRepository;
 
     public LineService(LineRepository lineRepository) {
         this.lineRepository = lineRepository;
     }
 
     public Line createLine(LineCreateDto lineCreateDto) {
-        Line line = new Line(lineCreateDto.getLineNumber(),
-                lineCreateDto.getLineName());
+        Line line = new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName());
         lineRepository.save(line);
+
         return line;
     }
 
@@ -27,10 +28,12 @@ public class LineService {
         return lineRepository.findById(id);
     }
 
+    public Line findLineByLineNumber(Integer lineNumber) {
+        return lineRepository.findLineByLineNumber(lineNumber);
+    }
+
     public void deleteLine(Long id) {
         Line line = lineRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        if (line != null) {
-            lineRepository.delete(line);
-        }
+        lineRepository.delete(line);
     }
 }
