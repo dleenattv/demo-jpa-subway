@@ -10,16 +10,15 @@ public class Subway {
     @Id
     @GeneratedValue
     private Long stationId;
+
+    @Column
     private String stationName;
+
     @ManyToOne
-    @JoinColumn(name="LINE_ID")
+    @JoinColumn(name = "LINE_ID")
     private Line line;
 
     public Subway() {
-    }
-
-    public Subway(String stationName) {
-        this.stationName = stationName;
     }
 
     public Subway(String stationName, Line line) {
@@ -27,24 +26,8 @@ public class Subway {
         this.line = line;
     }
 
-    public Long getStationId() {
-        return stationId;
-    }
-
-    public void setStationId(Long stationId) {
-        this.stationId = stationId;
-    }
-
-    public String getStationName() {
-        return stationName;
-    }
-
     public void setStationName(String stationName) {
         this.stationName = stationName;
-    }
-
-    public Line getLine() {
-        return line;
     }
 
     public void setLine(Line line) {
