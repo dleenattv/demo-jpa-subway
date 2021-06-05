@@ -29,12 +29,11 @@ public class LineService {
         if (line != null) {
             throw new RuntimeException("already exists");
         }
+        line = new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName());
+        Line savedLine = lineRepository.save(line);
 
         String stationName = lineCreateDto.getSubwayNames().get(0);
         Subway subwayByStationName = subwayRepository.findSubwayByStationName(stationName);
-
-        line = new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName());
-        Line savedLine = lineRepository.save(line);
         if (subwayByStationName == null) {
             Subway subway = new Subway(stationName, savedLine);
             subwayRepository.save(subway);
