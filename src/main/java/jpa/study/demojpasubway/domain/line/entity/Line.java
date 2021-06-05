@@ -1,6 +1,6 @@
 package jpa.study.demojpasubway.domain.line.entity;
 
-import jpa.study.demojpasubway.domain.subway.entity.Subway;
+import jpa.study.demojpasubway.domain.station.entity.Station;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Line {
     private String lineName;
 
     @OneToMany(mappedBy = "line")
-    private List<Subway> stations = new ArrayList<>();
+    private List<Station> stations = new ArrayList<>();
 
 
     public Line() {
