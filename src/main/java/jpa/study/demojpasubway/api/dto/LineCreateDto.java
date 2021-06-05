@@ -13,11 +13,21 @@ public class LineCreateDto {
 
     private List<String> stationNames;
 
+    public LineCreateDto(Integer lineNumber, String lineName, List<String> subwayNames) {
+        this.lineNumber = lineNumber;
+        this.lineName = lineName;
+        this.subwayNames = subwayNames;
+    }
+
     public Integer getLineNumber() {
         return lineNumber;
     }
 
     public String getLineName() {
         return lineName;
+    }
+
+    public List<String> getSubwayNames() {
+        return subwayNames;
     }
 }

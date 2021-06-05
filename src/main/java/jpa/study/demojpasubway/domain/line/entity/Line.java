@@ -31,4 +31,8 @@ public class Line {
         this.lineNumber = lineNumber;
         this.lineName = lineName;
     }
+
+    public void add(Subway station) {
+        stations.add(station);
+    }
 }
