@@ -19,4 +19,11 @@ public class StationCreateDto {
         return lineNumber;
     }
 
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    public void setLineNumber(Integer lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 }

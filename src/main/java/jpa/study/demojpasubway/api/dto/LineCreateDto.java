@@ -1,7 +1,6 @@
 package jpa.study.demojpasubway.api.dto;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public class LineCreateDto {
 
@@ -11,13 +10,19 @@ public class LineCreateDto {
     @NotNull
     private String lineName;
 
-    private List<String> stationNames;
-
     public Integer getLineNumber() {
         return lineNumber;
     }
 
     public String getLineName() {
         return lineName;
+    }
+
+    public void setLineNumber(Integer lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
+    public void setLineName(String lineName) {
+        this.lineName = lineName;
     }
 }
