@@ -1,5 +1,6 @@
 package jpa.study.demojpasubway.domain.station.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jpa.study.demojpasubway.domain.line.entity.Line;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 public class Station {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long stationId;
 
     @Column
@@ -16,6 +17,7 @@ public class Station {
 
     @ManyToOne
     @JoinColumn(name = "LINE_ID")
+    @JsonBackReference
     private Line line;
 
     public Station() {
@@ -32,5 +34,17 @@ public class Station {
 
     public void setLine(Line line) {
         this.line = line;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public Line getLine() {
+        return line;
+    }
+
+    public Long getId() {
+        return stationId;
     }
 }
