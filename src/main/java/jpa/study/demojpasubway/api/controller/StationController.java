@@ -34,6 +34,11 @@ public class StationController {
         return stationService.findStationById(id);
     }
 
+    @GetMapping("/stations/line/{lineNumber}")
+    public List<Station> findStationsByLineNumber(@PathVariable Integer lineNumber) {
+        return stationService.findStationsByLineNumber(lineNumber);
+    }
+
     @PutMapping("/stations/{id}")
     public Station updateStation(@PathVariable Long id, @Valid StationUpdateDto stationUpdateDto) {
         return stationService.updateStation(id, stationUpdateDto);
