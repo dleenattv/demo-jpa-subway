@@ -26,7 +26,7 @@ public class StationService {
     public Station createStation(StationCreateDto stationCreateDto) throws Exception {
         Line line = lineService.findLineByLineNumber(stationCreateDto.getLineNumber());
         Station station = new Station();
-        if (line == null) {     // null 일때 line 을 insert 하고싶은데, line insert 시 station 이 필요해서 빙글빙글 도는 느낌
+        if (line == null) {
             throw new Exception("Line does not exist");
         } else {
             station = new Station(stationCreateDto.getStationName(),
@@ -45,10 +45,13 @@ public class StationService {
         return stationRepository.findById(id);
     }
 
-    // line 영속화를 하려면?
+    public List<Station> findStationsByLineNumber(Integer lineNumber) {
+        Line line = lineService.findLineByLineNumber(lineNumber);
+        return stationRepository.findStationsByLine(line);
+    }
+
     public Station updateStation(Long id, StationUpdateDto stationUpdateDto) {
         Station station = stationRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-//        Line line = lineService.findLineById(station.getLine().getLineId()).orElseThrow(EntityNotFoundException::new);
         station.setLine(stationUpdateDto.getLine());
         station.setStationName(stationUpdateDto.getStationName());
 
