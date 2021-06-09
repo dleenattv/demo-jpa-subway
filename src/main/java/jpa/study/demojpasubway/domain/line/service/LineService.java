@@ -4,6 +4,7 @@ import jpa.study.demojpasubway.api.dto.LineCreateDto;
 import jpa.study.demojpasubway.domain.line.entity.Line;
 import jpa.study.demojpasubway.domain.line.repository.LineRepository;
 import jpa.study.demojpasubway.domain.station.entity.Station;
+import jpa.study.demojpasubway.domain.station.repository.StationRepository;
 import jpa.study.demojpasubway.domain.station.service.StationService;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +16,12 @@ public class LineService {
 
     private final LineRepository lineRepository;
     // 순환 참조 발생 (LineController -> LineService -> StationService)
-    private final StationService stationService;
+//    private final StationService stationService;
+    private final StationRepository stationRepository;
 
-    public LineService(LineRepository lineRepository, StationService stationService) {
+    public LineService(LineRepository lineRepository, StationRepository stationRepository) {
         this.lineRepository = lineRepository;
-        this.stationService = stationService;
+        this.stationRepository = stationRepository;
     }
 
     public Line createLine(LineCreateDto lineCreateDto) throws Exception {
@@ -41,9 +43,9 @@ public class LineService {
 
     public void deleteLine(Long id) {
         Line line = lineRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        List<Station> stations = stationService.findStationsByLineNumber(line.getLineNumber());
+        List<Station> stations = stationRepository.findStationsByLine(line);
         for (Station station : stations) {
-            stationService.deleteStation(station.getId());
+            stationRepository.delete(station);
         }
         lineRepository.delete(line);
     }
