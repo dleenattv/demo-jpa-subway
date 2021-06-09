@@ -50,10 +50,16 @@ public class StationService {
         return stationRepository.findStationsByLine(line);
     }
 
-    public Station updateStation(Long id, StationUpdateDto stationUpdateDto) {
+    public Station updateStation(Long id, StationUpdateDto stationUpdateDto) throws Exception {
         Station station = stationRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        station.setLine(stationUpdateDto.getLine());
-        station.setStationName(stationUpdateDto.getStationName());
+        Integer lineNumber = stationUpdateDto.getLineNumber();
+
+        if (lineService.findLineByLineNumber(lineNumber) != null) {
+            station.setStationName(stationUpdateDto.getStationName());
+            station.setLine(lineService.findLineByLineNumber(lineNumber));
+        } else {
+            throw new Exception("Line" + lineNumber + " does not exists.");
+        }
 
         stationRepository.save(station);
         return station;
