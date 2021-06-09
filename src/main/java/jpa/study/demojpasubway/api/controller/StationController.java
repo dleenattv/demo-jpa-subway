@@ -38,7 +38,7 @@ public class StationController {
     public List<Station> findStationsByLineNumber(@PathVariable Integer lineNumber) {
         return stationService.findStationsByLineNumber(lineNumber);
     }
-    
+
     @PutMapping("/stations/line/{id}")
     public Station updateStation(@PathVariable Long id, @RequestBody StationUpdateDto stationUpdateDto) throws Exception {
         return stationService.updateStation(id, stationUpdateDto);
