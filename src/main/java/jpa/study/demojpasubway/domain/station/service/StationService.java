@@ -28,14 +28,6 @@ public class StationService {
 
         Station station = new Station();
         station = station.getStationFrom(line);
-//
-//        if (line == null) {
-//            throw new Exception("Line does not exist");
-//        } else {
-//            station = new Station(stationCreateDto.getStationName(),
-//                                line);
-//            stationRepository.save(station);
-//        }
         station.setStationName(stationCreateDto.getStationName());
         stationRepository.save(station);
 
@@ -56,20 +48,15 @@ public class StationService {
     }
 
     public Station updateStation(Long id, StationUpdateDto stationUpdateDto) throws Exception {
-        Station station = stationRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Station station = getStationBy(id);
+        Line line = lineService.getLineBy(stationUpdateDto.getLineNumber());
+        Station changedStation = station.getStationChangedBy(line);
 
-        Integer lineNumber = stationUpdateDto.getLineNumber();
+        return stationRepository.save(changedStation);
+    }
 
-        // db 에서 찾은 결과가 있냐 없냐를 따질 때 어떻게 entity 레이어로 로직을 옮길 수 있는지?
-        if (lineService.findLineByLineNumber(lineNumber) != null) {
-            station.setStationName(stationUpdateDto.getStationName());
-            station.setLine(lineService.findLineByLineNumber(lineNumber));
-        } else {
-            throw new Exception("Line" + lineNumber + " does not exists.");
-        }
-
-        stationRepository.save(station);
-        return station;
+    private Station getStationBy(Long id) {
+        return stationRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public void deleteStation(Long id) {
