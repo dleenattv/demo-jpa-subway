@@ -47,12 +47,4 @@ public class Line {
     public List<Station> getStations() {
         return stations;
     }
-
-    public Line isEmpty(Line line, LineCreateDto lineCreateDto) throws Exception {
-        if (line == null) {
-            return new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName());
-        } else {
-            throw new Exception("Line" + lineCreateDto.getLineNumber() + " already exists.");
-        }
-    }
 }
