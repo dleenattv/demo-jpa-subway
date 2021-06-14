@@ -25,16 +25,20 @@ public class LineService {
     }
 
     private Line findLineByLineNumber(LineCreateDto lineCreateDto) {
-        return lineRepository.findLineByLineNumber(lineCreateDto.getLineNumber())
+        return lineRepository
+                .findLineByLineNumber(lineCreateDto.getLineNumber())
                 .orElseGet(() -> new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName()));
     }
 
     public Line findLineByLineNumber(Integer lineNumber) {
-        return lineRepository.findLineByLineNumber(lineNumber).get();
+        return lineRepository
+                .findLineByLineNumber(lineNumber)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     public Line getLineBy(Integer lineNumber) throws Exception {
-        return lineRepository.findLineByLineNumber(lineNumber)
+        return lineRepository
+                .findLineByLineNumber(lineNumber)
                 .orElseThrow(() -> new Exception("Line" + lineNumber + " does not exist."));
     }
 
