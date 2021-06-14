@@ -20,26 +20,22 @@ public class LineService {
         this.stationRepository = stationRepository;
     }
 
-    public Line createLine(LineCreateDto lineCreateDto) throws Exception {
-        Line existLine = findLineByLineNumber(lineCreateDto.getLineNumber());
-        System.out.println(lineCreateDto.getLineNumber());
-//        if (existLine == null) {
-//            Line line = new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName());
-//            lineRepository.save(line);
-//
-//            return line;
-//        } else {
-//            throw new Exception("Line" + lineCreateDto.getLineNumber() + " already exists.");
-//        }
+    public Line createLine(LineCreateDto lineCreateDto) {
+        return lineRepository.save(findLineByLineNumber(lineCreateDto));
+    }
 
-        Line line = existLine.isEmpty(existLine, lineCreateDto);
-        System.out.println(line.getLineNumber());
-        lineRepository.save(line);
-        return line;
+    private Line findLineByLineNumber(LineCreateDto lineCreateDto) {
+        return lineRepository.findLineByLineNumber(lineCreateDto.getLineNumber())
+                .orElseGet(() -> new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName()));
     }
 
     public Line findLineByLineNumber(Integer lineNumber) {
-        return lineRepository.findLineByLineNumber(lineNumber);
+        return lineRepository.findLineByLineNumber(lineNumber).get();
+    }
+
+    public Line getLineBy(Integer lineNumber) throws Exception {
+        return lineRepository.findLineByLineNumber(lineNumber)
+                .orElseThrow(() -> new Exception("Line" + lineNumber + " does not exist."));
     }
 
     public void deleteLine(Long id) {
