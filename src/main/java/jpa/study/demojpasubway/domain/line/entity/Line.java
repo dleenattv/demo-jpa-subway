@@ -1,10 +1,7 @@
 package jpa.study.demojpasubway.domain.line.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jpa.study.demojpasubway.api.dto.LineCreateDto;
-import jpa.study.demojpasubway.api.dto.StationUpdateDto;
 import jpa.study.demojpasubway.domain.station.entity.Station;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import javax.persistence.*;
 import java.util.ArrayList;
