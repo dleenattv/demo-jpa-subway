@@ -23,13 +23,16 @@ public class StationService {
         this.lineService = lineService;
     }
 
-    public Station createStation(StationCreateDto stationCreateDto) throws Exception {
+    public Station createStation(StationCreateDto stationCreateDto) {
         Line line = lineService.findLineByLineNumber(stationCreateDto.getLineNumber());
+        Station station = getStationBy(stationCreateDto, line);
 
-        Station station = new Station();
-        station = station.getStationFrom(line);
+        return stationRepository.save(station);
+    }
+
+    private Station getStationBy(StationCreateDto stationCreateDto, Line line) {
+        Station station = new Station(line);
         station.setStationName(stationCreateDto.getStationName());
-        stationRepository.save(station);
 
         return station;
     }
