@@ -1,7 +1,10 @@
 package jpa.study.demojpasubway.domain.line.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jpa.study.demojpasubway.api.dto.LineCreateDto;
+import jpa.study.demojpasubway.api.dto.StationUpdateDto;
 import jpa.study.demojpasubway.domain.station.entity.Station;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,10 +24,9 @@ public class Line {
     @Column
     private String lineName;
 
-    @OneToMany(mappedBy = "line")
+    @OneToMany(mappedBy = "line", fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Station> stations = new ArrayList<>();
-
 
     public Line() {
     }
@@ -44,5 +46,13 @@ public class Line {
 
     public List<Station> getStations() {
         return stations;
+    }
+
+    public Line isEmpty(Line line, LineCreateDto lineCreateDto) throws Exception {
+        if (line == null) {
+            return new Line(lineCreateDto.getLineNumber(), lineCreateDto.getLineName());
+        } else {
+            throw new Exception("Line" + lineCreateDto.getLineNumber() + " already exists.");
+        }
     }
 }
