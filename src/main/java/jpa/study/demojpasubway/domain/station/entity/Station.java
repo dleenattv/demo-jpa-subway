@@ -59,4 +59,9 @@ public class Station {
 
         return new Station(line);
     }
+
+    public Station getStationChangedBy(Line line) {
+        this.line = line;
+        return this;
+    }
 }
