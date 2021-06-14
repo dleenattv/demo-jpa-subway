@@ -23,16 +23,12 @@ public class Station {
     public Station() {
     }
 
-    public Station(String stationName, Line line) {
-        this.stationName = stationName;
+    public Station(Line line) {
         this.line = line;
     }
 
-    public void setStationName(String stationName) {
+    public Station(String stationName, Line line) {
         this.stationName = stationName;
-    }
-
-    public void setLine(Line line) {
         this.line = line;
     }
 
@@ -40,11 +36,27 @@ public class Station {
         return stationName;
     }
 
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
     public Line getLine() {
         return line;
     }
 
+    public void setLine(Line line) {
+        this.line = line;
+    }
+
     public Long getId() {
         return stationId;
+    }
+
+    public Station getStationFrom(Line line) throws Exception {
+        if (line == null) {
+            throw new Exception("Line does not exist");
+        }
+
+        return new Station(line);
     }
 }
