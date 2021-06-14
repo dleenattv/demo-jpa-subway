@@ -40,7 +40,7 @@ public class StationController {
     }
 
     @PutMapping("/stations/line/{id}")
-    public Station updateStation(@PathVariable Long id, @RequestBody StationUpdateDto stationUpdateDto) throws Exception {
+    public Station updateStation(@PathVariable Long id, @Valid @RequestBody StationUpdateDto stationUpdateDto) throws Exception {
         return stationService.updateStation(id, stationUpdateDto);
     }
 

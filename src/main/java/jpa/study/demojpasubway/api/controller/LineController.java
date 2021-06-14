@@ -17,7 +17,7 @@ public class LineController {
     }
 
     @PostMapping("/lines")
-    public Line createLine(@Valid LineCreateDto lineCreateDto) throws Exception {
+    public Line createLine(@Valid @RequestBody LineCreateDto lineCreateDto) throws Exception {
         return lineService.createLine(lineCreateDto);
     }
 
