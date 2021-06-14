@@ -52,14 +52,6 @@ public class Station {
         return stationId;
     }
 
-    public Station getStationFrom(Line line) throws Exception {
-        if (line == null) {
-            throw new Exception("Line does not exist");
-        }
-
-        return new Station(line);
-    }
-
     public Station getStationChangedBy(Line line) {
         this.line = line;
         return this;
