@@ -3,7 +3,6 @@ package jpa.study.demojpasubway.domain.line.service;
 import jpa.study.demojpasubway.api.dto.LineCreateDto;
 import jpa.study.demojpasubway.domain.line.entity.Line;
 import jpa.study.demojpasubway.domain.line.repository.LineRepository;
-import jpa.study.demojpasubway.domain.station.entity.Station;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -42,10 +41,12 @@ public class LineService {
     public void deleteLine(Long id) {
         Line line = lineRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
-        for (Station station : line.getStations()) {
-            station.setLine(null);
-        }
+        deleteStationsOf(line);
 
         lineRepository.delete(line);
+    }
+
+    private void deleteStationsOf(Line line) {
+        line.getStations().forEach(station -> station.setLine(null));
     }
 }
