@@ -46,7 +46,7 @@ public class LineService {
         Line line = lineRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 
         for (Station station : line.getStations()) {
-            stationRepository.delete(station);
+            station.setLine(null);
         }
 
         lineRepository.delete(line);
