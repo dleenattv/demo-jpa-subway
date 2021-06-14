@@ -20,7 +20,7 @@ public class StationController {
     }
 
     @PostMapping("/stations")
-    public Station createStation(@Valid StationCreateDto stationCreateDto) throws Exception {
+    public Station createStation(@Valid StationCreateDto stationCreateDto) {
         return stationService.createStation(stationCreateDto);
     }
 
