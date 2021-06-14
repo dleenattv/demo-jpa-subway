@@ -4,7 +4,6 @@ import jpa.study.demojpasubway.api.dto.LineCreateDto;
 import jpa.study.demojpasubway.domain.line.entity.Line;
 import jpa.study.demojpasubway.domain.line.repository.LineRepository;
 import jpa.study.demojpasubway.domain.station.entity.Station;
-import jpa.study.demojpasubway.domain.station.repository.StationRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -13,11 +12,9 @@ import javax.persistence.EntityNotFoundException;
 public class LineService {
 
     private final LineRepository lineRepository;
-    private final StationRepository stationRepository;
 
-    public LineService(LineRepository lineRepository, StationRepository stationRepository) {
+    public LineService(LineRepository lineRepository) {
         this.lineRepository = lineRepository;
-        this.stationRepository = stationRepository;
     }
 
     public Line createLine(LineCreateDto lineCreateDto) {
